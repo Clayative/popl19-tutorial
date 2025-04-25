@@ -1,5 +1,6 @@
 -- Type checker for the WHILE language.
 
+{-# OPTIONS --sized-types #-}
 {-# OPTIONS --postfix-projections #-}
 
 module TypeChecker where

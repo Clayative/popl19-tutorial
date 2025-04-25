@@ -1,7 +1,7 @@
 
 open import Data.List
 open import Data.List.Membership.Propositional
-open import Data.List.Any
+open import Data.List.Relation.Unary.Any
 open import Data.Product
 
 open import Level
@@ -15,10 +15,10 @@ open import Relation.Nullary
 module Library.List where
 
 open import Data.List.Base public using (List; []; _∷_; foldl)
-open import Data.List.All public using (All; []; _∷_) hiding (module All)
+open import Data.List.Relation.Unary.All public using (All; []; _∷_) hiding (module All)
 
 module All where
-  open import Data.List.All public using (lookup; map; tail)
+  open import Data.List.Relation.Unary.All public using (lookup; map; tail)
 
   -- A simple, unverified implementation of UpdateWith.
 
@@ -31,7 +31,7 @@ module _ {a p} {A : Set a} {P : A → Set p} where
 
   -- Membership in List.All
 
-  data _↤_∈_ {x} (v : P x) : ∀ {xs} → x ∈ xs → All P xs → Set where
+  data _↤_∈_ {x} (v : P x) : ∀ {xs} → x ∈ xs → All P xs → Set (p ⊔ a) where
 
     here  : ∀ {xs} {vs : All P xs}
       → v ↤ here refl ∈ (v ∷ vs)
@@ -42,7 +42,7 @@ module _ {a p} {A : Set a} {P : A → Set p} where
 
   -- This is how we want to write it:
 
-  _↦_∈_ : ∀ {x xs} → x ∈ xs → P x → All P xs → Set
+  _↦_∈_ : ∀ {x xs} → x ∈ xs → P x → All P xs → Set (p ⊔ a)
   x ↦ v ∈ vs = v ↤ x ∈ vs
 
 

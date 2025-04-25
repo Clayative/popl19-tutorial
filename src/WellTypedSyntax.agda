@@ -1,4 +1,5 @@
 -- Intrinsically well-typed WHILE syntax.
+{-# OPTIONS --sized-types #-}
 
 module WellTypedSyntax where
 

@@ -11,7 +11,7 @@ parser=While/Test
 
 # agda=agda-2.5.4.2
 agda=agda
-ghcflags=--ghc-flag=-i../haskell --ghc-flag=-Wwarn
+ghcflags=--ghc-flag=-i../haskell --ghc-flag=-Wwarn --ghc-flag=-XPatternSynonyms
 
 # runwhile.agda must be first
 agdafiles=runwhile.agda Library.agda Library/Eq.agda Library/Monad.agda Library/Print.agda AST.agda Parser.agda WellTypedSyntax.agda TypeChecker.agda Value.agda Delay.agda Interpreter.agda UntypedInterpreter.agda

@@ -1,4 +1,5 @@
 -- Type checker and interpreter for WHILE language.
+{-# OPTIONS --sized-types #-}
 
 module runwhile where
 

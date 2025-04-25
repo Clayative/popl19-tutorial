@@ -1,5 +1,7 @@
 -- Values and primitive operations; environments.
 
+{-# OPTIONS --sized-types #-}
+
 module Value where
 
 open import Library

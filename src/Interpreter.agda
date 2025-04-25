@@ -1,5 +1,7 @@
 -- Interpreter for WHILE language.
 
+{-# OPTIONS --sized-types #-}
+
 -- As computation is not guaranteed to terminate,
 -- execution of statements is placed in the Delay monad.
 

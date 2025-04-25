@@ -1,10 +1,12 @@
 -- The delay monad for potentially non-terminating computation.
 
+{-# OPTIONS --sized-types #-}
+
 module Delay where
 
 open import Library
-open import Category.Monad
-open import Category.Applicative.Indexed
+open import Effect.Monad
+open import Effect.Applicative.Indexed
 
 -- Coinductive delay monad.
 

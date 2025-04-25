@@ -8,7 +8,7 @@ open import Library.Monad
 
 module Library.IO where
 
-open import IO.Primitive public using (IO)
+open import IO.Primitive.Core public using (IO)
 
 {-# FOREIGN GHC import qualified Data.Text #-}
 {-# FOREIGN GHC import qualified Data.Text.IO #-}
@@ -33,11 +33,11 @@ postulate
 
 instance
   functorIO : ∀ {a} → Functor (IO {a})
-  fmap {{functorIO}} f mx = mx IO.Primitive.>>= λ x → IO.Primitive.return (f x)
+  fmap {{functorIO}} f mx = mx IO.Primitive.Core.>>= λ x → IO.Primitive.Core.return (f x)
 
   applicativeIO : ∀ {a} → Applicative (IO {a})
-  pure  {{applicativeIO}}       = IO.Primitive.return
-  _<*>_ {{applicativeIO}} mf mx = mf IO.Primitive.>>= λ f → f <$> mx
+  pure  {{applicativeIO}}       = IO.Primitive.Core.return
+  _<*>_ {{applicativeIO}} mf mx = mf IO.Primitive.Core.>>= λ f → f <$> mx
 
   monadIO : ∀ {a} → Monad (IO {a})
-  _>>=_ {{monadIO}} = IO.Primitive._>>=_
+  _>>=_ {{monadIO}} = IO.Primitive.Core._>>=_

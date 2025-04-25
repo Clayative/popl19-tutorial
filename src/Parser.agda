@@ -1,5 +1,7 @@
 -- FFI binding to the Haskell parser for the WHILE language.
 
+{-# OPTIONS --sized-types #-}
+
 module Parser where
 
 open import Library
@@ -8,7 +10,7 @@ open import AST using (Program)
 {-# FOREIGN GHC import qualified Data.Text  #-}
 
 {-# FOREIGN GHC import While.Abs  (Program)           #-}
-{-# FOREIGN GHC import While.ErrM (Err(Ok, Bad))      #-}
+{-# FOREIGN GHC import While.ErrM (Err, pattern Ok, pattern Bad)      #-}
 {-# FOREIGN GHC import While.Par  (pProgram, myLexer) #-}
 
 -- Error monad of BNFC

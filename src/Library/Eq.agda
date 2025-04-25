@@ -1,9 +1,9 @@
 
 module Library.Eq where
 
-open import Data.Bool.Base using (Bool)
-open import Data.Char
-import Data.Char.Unsafe
+open import Data.Bool using (Bool)
+import Data.Bool.Properties
+open import Data.Char using (Char)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.String using (String)
@@ -33,7 +33,7 @@ open Eq {{...}} public
 
 instance
   eqBool : Eq Bool
-  _≟_ {{eqBool}} = Data.Bool.Base._≟_
+  _≟_ {{eqBool}} = Data.Bool.Properties._≟_
 
 instance
   eqℤ : Eq ℤ
@@ -41,11 +41,11 @@ instance
 
 instance
   eqChar : Eq Char
-  _≟_ {{eqChar}} = Data.Char.Unsafe._≟_
+  _≟_ {{eqChar}} = Data.Char._≟_
 
 instance
   eqString : Eq String
-  _≟_ {{eqString}} = Data.String.Unsafe._≟_
+  _≟_ {{eqString}} = Data.String._≟_
 
 instance
   eqList : ∀ {ℓ} {A : Set ℓ} {{_ : Eq A}} → Eq (List A)

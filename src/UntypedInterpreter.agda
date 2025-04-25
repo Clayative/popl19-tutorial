@@ -4,6 +4,8 @@
 -- * May fail due to scope and other runtime errors.
 -- * while loops may not terminate.
 
+{-# OPTIONS --sized-types #-}
+
 open import Library
 open import AST
 open Integer

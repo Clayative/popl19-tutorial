@@ -1,4 +1,5 @@
 -- Imports from the standard library and additional Haskell bindings.
+{-# OPTIONS --sized-types #-}
 
 module Library where
 
@@ -8,8 +9,8 @@ open import Data.Empty                            public using (⊥)
 open import Data.Integer.Base                     public using (ℤ; -[1+_]; +_; _+_; _-_; _*_)
 open import Data.List.Base                        public using (List; []; _∷_; _++_) hiding (module List)
 open import Data.List.Membership.Propositional    public using (_∈_; _∉_)
-open import Data.List.All                         public using ([]; _∷_)
-open import Data.List.Any                         public using (here; there)
+open import Data.List.Relation.Unary.All                         public using ([]; _∷_)
+open import Data.List.Relation.Unary.Any                         public using (here; there)
 open import Data.Maybe.Base                       public using (Maybe; nothing; just)
 open import Data.Nat.Base                         public using (ℕ; zero; suc)
 open import Data.Product                          public using (∃; ∃₂; _×_; _,_; proj₁; proj₂; map₂)
