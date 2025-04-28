@@ -35,6 +35,8 @@ data Exp : Set where
   ePlus     : (e e' : Exp)             → Exp
   eGt       : (e e' : Exp)             → Exp
   eAnd      : (e e' : Exp)             → Exp
+  eNeg      : (e : Exp)                → Exp
+  eSub      : (e e' : Exp)             → Exp
 
 
 {-# COMPILE GHC Exp = data Exp
@@ -44,6 +46,8 @@ data Exp : Set where
   | EPlus
   | EGt
   | EAnd
+  | ENeg
+  | ESub
   ) #-}
 
 record Decl : Set where
@@ -60,10 +64,12 @@ open Decl public
 data Stm : Set where
   sAss    : (x : Id) (e : Exp)            → Stm
   sWhile  : (e : Exp) (ss : List Stm)     → Stm
+  sIfElse : (i : Exp) (ss₁ ss₂ : List Stm) → Stm
 
 {-# COMPILE GHC Stm = data Stm
   ( SAss
   | SWhile
+  | SIfElse
   ) #-}
 
 record Program : Set where

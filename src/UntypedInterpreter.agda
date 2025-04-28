@@ -90,6 +90,12 @@ module EvalExp (ρ : Env) where
   eval (eAnd e₁ e₂) = case (eval e₁ , eval e₂) of λ where
     (just (boolV b₁) , just (boolV b₂)) → just (boolV (bAnd b₁ b₂))
     _ → nothing
+  eval (eNeg x) = case (eval x) of λ where
+    (just (boolV b)) → just (boolV (bNot b))
+    _ → nothing
+  eval (eSub e₁ e₂) = case (eval e₁ , eval e₂) of λ where
+    (just (intV i) , just (intV j)) → just (intV (i - j))
+    _ → nothing
 
 open EvalExp
 
@@ -133,6 +139,11 @@ module ExecStm where
         nothing   → nothing
       (just (boolV false)) → just ρ
       _                    → nothing
+    
+    execStm fuel (sIfElse i ss₁ ss₂) ρ = case eval ρ i of λ where 
+      (just (boolV true)) → execStms fuel ss₁ ρ
+      (just (boolV false)) → execStms fuel ss₂ ρ
+      _ → nothing
 
     -- Execution of a statement sequence, passes the fuel
     -- to every statement.

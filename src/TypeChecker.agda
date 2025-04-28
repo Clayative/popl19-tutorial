@@ -83,6 +83,10 @@ module CheckExpressions {Γ : Cxt} (γ : TCCxt Γ) where
 
     inferExp (A.eAnd   e₁ e₂) = inferOp and   e₁ e₂
 
+    inferExp (A.eNeg e)       = inferuOp neg e
+
+    inferExp (A.eSub e₁ e₂)  = inferOp sub e₁ e₂
+
     -- Type checking.
     -- Calls inference and checks inferred type against given type.
 
@@ -101,6 +105,11 @@ module CheckExpressions {Γ : Cxt} (γ : TCCxt Γ) where
       e₂' ← checkExp e₂ t
       return (t' , eOp op e₁' e₂')
 
+    inferuOp : ∀{t t'} (uop : uOp t t') (e : A.Exp) → Error (∃ λ t → Exp Γ t)
+    inferuOp {t} {t'} uop e = do
+      e' ← checkExp e t
+      return ( t' , euOp uop e' )
+
   mutual
 
     -- Checking a single statement.
@@ -116,6 +125,12 @@ module CheckExpressions {Γ : Cxt} (γ : TCCxt Γ) where
       e'  ← checkExp e bool
       ss' ← checkStms ss
       return (sWhile e' ss')
+
+    checkStm (A.sIfElse i ss₁ ss₂) = do
+      i' ← checkExp i bool
+      ss₁' ← checkStms ss₁
+      ss₂' ← checkStms ss₂
+      return (sIfElse i' ss₁' ss₂')
 
     -- Checking a list of statements.
 

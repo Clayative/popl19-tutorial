@@ -26,6 +26,8 @@ module EvalExp {Γ} (ρ : Env Γ) where
   eval (eOp and e₁ e₂)        = case eval e₁ of λ where
     true  → eval e₂
     false → false
+  eval (eOp sub e₁ e₂)       = eval e₁ - eval e₂
+  eval (euOp neg e) = bNot (eval e)
 
 open EvalExp
 

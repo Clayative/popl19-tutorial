@@ -19,6 +19,7 @@ terminator Decl "";
 
 SAss.   Stm ::= Ident "=" Exp ";";
 SWhile. Stm ::= "while" Exp4 "{" [Stm] "}";
+SIfElse.    Stm ::= "if" Exp4 "{" [Stm] "}" "else" "{" [Stm] "}";
 
 terminator Stm "";
 
@@ -34,6 +35,8 @@ EBool.  Exp3 ::= Boolean;
 EPlus.  Exp2 ::= Exp2 "+" Exp3;  -- left-associative
 EGt.    Exp1 ::= Exp2 ">" Exp2;  -- non-associative
 EAnd.   Exp  ::= Exp "&&" Exp1;  -- left-associative
+ENeg.   Exp2  ::= "!" Exp2;
+ESub.   Exp2  ::= Exp2 "-" Exp3; -- left-associative
 
 coercions Exp 4;
 

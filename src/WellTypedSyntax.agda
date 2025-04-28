@@ -19,6 +19,11 @@ data Op : (dom codom : Type) → Set where
   plus  : Op int  int
   gt    : Op int  bool
   and   : Op bool bool
+  sub   : Op int int
+
+-- Unary operators
+data uOp : (dom codom : Type) → Set where
+  neg   : uOp bool bool
 
 -- Well-typed expressions: context is fixed.
 
@@ -30,6 +35,7 @@ data Exp (Γ : Cxt) : Type → Set where
   eOp   : ∀{t t'} (op : Op t t') (e e' : Exp Γ t) → Exp Γ t'
   -- Variables:
   eVar  : ∀{t}    (x : Var Γ t)                   → Exp Γ t
+  euOp  : ∀{t t'} (uop : uOp t t') (e : Exp Γ t) → Exp Γ t'
 
 -- Well-typed declarations (extending the context).
 
